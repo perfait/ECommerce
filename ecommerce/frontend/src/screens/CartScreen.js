@@ -37,7 +37,7 @@ const CartScreens = () => {
 
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    navigate('/login?redirect=/shipping')
   }
 
 
@@ -67,18 +67,19 @@ const CartScreens = () => {
                       </Col>
 
                       <Col md={3}>
-                        <Form.Control
-                            as="select"
-                            className="form-select"
-                            value={item.qty}
-                            onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
-                          >
-                            {[...Array(item.countInStock).keys()].map((x) => (
-                              <option key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </option>
-                            ))}
-                          </Form.Control>
+                      <Form.Control
+                        as="select"
+                        className="form-select"
+                        value={item.qty}
+                        onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
+                      >
+                        {[...Array(item.countInStock > 0 ? item.countInStock : 1).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+
                           </Col>
                           <Col md={1}>
                             <Button
